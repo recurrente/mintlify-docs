@@ -1,24 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
+  "projectType": "saas",
+  "projectName": "Recurrente",
+  "projectDescription": "Recurrente es una plataforma de pagos para Guatemala y Latinoamérica que permite a personas y negocios cobrar con tarjeta, transferencia bancaria, efectivo, QR, POS y más.",
   "theme": "almond",
-  "name": "Recurrente",
-  "colors": {
-    "primary": "#132444",
-    "light": "#334563"
-  },
-  "logo": {
-    "light": "https://media.brand.dev/bf890242-3b5a-40e3-b866-fb0c294df23f.png",
-    "dark": "https://media.brand.dev/bf890242-3b5a-40e3-b866-fb0c294df23f.png"
-  },
-  "favicon": "https://icons.duckduckgo.com/ip3/ayuda.recurrente.com.ico",
-  "font": {
-    "headings": {
-      "family": "Inter"
-    },
-    "body": {
-      "family": "Inter"
-    }
-  },
+  "primaryColor": "#132444",
+  "lightColor": "#334563",
+  "darkColor": null,
   "navigation": {
     "tabs": [
       {
@@ -53,7 +40,7 @@
             ]
           },
           {
-            "group": "POS y Celular",
+            "group": "POS y Celular como POS",
             "pages": [
               "es/pos-pro",
               "es/celular-como-pos"
@@ -116,5 +103,29 @@
         ]
       }
     ]
-  }
+  },
+  "keyFeatures": [
+    "Links de pago con tarjeta de crédito y débito (GTQ y USD)",
+    "Tienda en línea con productos, suscripciones y cupones",
+    "POS Pro y Celular como POS (Tap2Pay)",
+    "Pagos en cuotas para tarjetas guatemaltecas",
+    "Transferencias bancarias locales e internacionales (ACH, Wire, SPEI, SEPA)",
+    "Dólares digitales (USDC, USDT)",
+    "Factura electrónica (FEL) automática y manual",
+    "Retiros inmediatos y programados",
+    "Cuentas personales y comerciales con distintas comisiones",
+    "Integraciones con WooCommerce, Odoo y Bubble",
+    "API y webhooks para desarrolladores",
+    "Código QR y cobro flexible",
+    "Organizaciones y gestión de múltiples sucursales",
+    "Prevención de fraude con motor 3DS y PCI DSS"
+  ],
+  "publicApiSurface": [
+    "API REST en docs.recurrente.com",
+    "Webhooks: payment_intent.succeeded, payment_intent.failed, subscription.create, subscription.past_due, subscription.cancel",
+    "Plugin WooCommerce",
+    "Plugin Odoo (versiones 15, 16, 17, 18)",
+    "Integración con Bubble via API Connector",
+    "Cuentas conectadas (cobrar en nombre de otra cuenta)"
+  ]
 }

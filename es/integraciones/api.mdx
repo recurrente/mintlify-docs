@@ -1,0 +1,82 @@
+---
+title: "API de Recurrente: integra pagos en tu plataforma"
+sidebarTitle: "API"
+description: "Recurrente ofrece una API REST completa para construir integraciones personalizadas de pagos y suscripciones."
+---
+
+Recurrente cuenta con una API REST que te permite crear checkouts, gestionar suscripciones, consultar transacciones y mucho más desde tu propia plataforma o aplicación. Si los plugins de WooCommerce, Odoo o Bubble no se ajustan a tu caso de uso, la API te da control total para construir exactamente lo que necesitas.
+
+## Documentación de la API
+
+Puedes consultar la referencia completa de endpoints, parámetros y ejemplos de respuesta en el sitio de documentación oficial:
+
+<CardGroup cols={2}>
+  <Card
+    title="Documentación de la API"
+    icon="book-open"
+    href="https://docs.recurrente.com/"
+  >
+    Referencia completa de la API REST de Recurrente: endpoints, autenticación y ejemplos.
+  </Card>
+  <Card
+    title="Configurar Webhooks"
+    icon="webhook"
+    href="/es/integraciones/webhooks"
+  >
+    Recibe notificaciones en tiempo real cuando ocurra un pago o cambio de suscripción.
+  </Card>
+</CardGroup>
+
+## Cómo obtener tus llaves de API
+
+Para autenticarte con la API necesitas dos llaves: una **llave pública** y una **llave secreta**. Para obtenerlas:
+
+1. Ingresa a [app.recurrente.com](https://app.recurrente.com)
+2. Ve a **Mi Cuenta → Desarrolladores y API**
+3. Copia tu llave pública (`pk_live_...`) y tu llave secreta (`sk_live_...`)
+
+Desde esa misma sección también puedes configurar tus webhooks.
+
+## Tipos de llaves
+
+| Llave | Prefijo | Uso |
+|-------|---------|-----|
+| Llave pública | `pk_live_` | Inicializar el SDK en el cliente (frontend) |
+| Llave secreta | `sk_live_` | Llamadas desde tu servidor (backend) |
+
+<Warning>
+  **Nunca expongas tu llave secreta en el frontend ni en código público.** La llave secreta (`sk_live_`) solo debe usarse en tu servidor. Si alguien la obtiene, puede crear cobros en nombre de tu cuenta. Si sospechas que fue comprometida, regénérala inmediatamente desde **Mi Cuenta → Desarrolladores y API**.
+</Warning>
+
+## Autenticación
+
+Todas las solicitudes a la API deben incluir tus llaves en los headers HTTP:
+
+<Note>
+  Incluye ambas llaves en cada solicitud. La llave secreta va en el header `Authorization` y la llave pública en `X-Public-Key`.
+
+  ```http
+  Authorization: Bearer sk_live_xxxxxxxxxxxx
+  X-Public-Key: pk_live_xxxxxxxxxxxx
+  ```
+</Note>
+
+## Ejemplo: crear un checkout
+
+```bash
+curl -X POST https://app.recurrente.com/api/checkouts \
+  -H "Authorization: Bearer sk_live_xxxxxxxxxxxx" \
+  -H "X-Public-Key: pk_live_xxxxxxxxxxxx" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "items": [
+      {
+        "price_id": "price_xxxxxxxxxxxxxxxx"
+      }
+    ]
+  }'
+```
+
+La API responderá con un objeto que incluye la `checkout_url` a la que debes redirigir a tu cliente para completar el pago.
+
+Para explorar todos los endpoints disponibles, consulta la [documentación completa](https://docs.recurrente.com/).

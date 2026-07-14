@@ -1,0 +1,83 @@
+---
+title: "Webhooks: recibe notificaciones de pago en tiempo real"
+sidebarTitle: "Webhooks"
+description: "Configura webhooks para que Recurrente notifique a tu servidor cuando se complete un pago, falle o cambie una suscripción."
+---
+
+Los webhooks son notificaciones HTTP que Recurrente envía automáticamente a tu servidor cada vez que ocurre un evento importante en tu cuenta, como un pago completado, un pago fallido o un cambio en el estado de una suscripción. En lugar de tener que consultar la API periódicamente, tu servidor recibe la información en tiempo real y puede reaccionar de inmediato.
+
+## Cómo configurar un webhook
+
+<Steps>
+  <Step title="Accede a la sección de Webhooks">
+    Ingresa a [app.recurrente.com](https://app.recurrente.com) y ve a **Mi Cuenta → Desarrolladores y API**. Haz clic en el botón **Webhooks**. Serás redirigido automáticamente al panel de Svix, la plataforma que Recurrente usa para gestionar la entrega confiable de webhooks.
+  </Step>
+
+  <Step title="Agrega un endpoint">
+    En el panel de Svix, haz clic en **Add Endpoint** (esquina superior derecha). En el campo **Endpoint URL**, ingresa la URL de tu servidor que recibirá los eventos:
+
+    ```
+    https://tudominio.com/webhooks/recurrente
+    ```
+
+    La URL debe ser pública y accesible desde internet. Asegúrate de que responda con un código HTTP `200` al recibir el payload.
+  </Step>
+
+  <Step title="Selecciona los eventos (opcional)">
+    Por defecto, el endpoint recibirá todos los eventos. Si lo prefieres, puedes filtrar los tipos de eventos específicos que quieres recibir usando la configuración en Svix.
+  </Step>
+
+  <Step title="Guarda y prueba el endpoint">
+    Haz clic en **Create** para guardar el endpoint. Svix te permite enviar un evento de prueba directamente desde el panel para verificar que tu servidor lo está recibiendo correctamente.
+  </Step>
+</Steps>
+
+## Eventos disponibles
+
+| Evento | Descripción |
+|--------|-------------|
+| `payment_intent.succeeded` | Un pago se completó correctamente |
+| `payment_intent.failed` | Un pago falló o fue rechazado |
+| `subscription.create` | Se creó una nueva suscripción |
+| `subscription.past_due` | El cobro de una suscripción está vencido |
+| `subscription.cancel` | Una suscripción fue cancelada |
+
+## Ejemplo de payload
+
+Cuando Recurrente envía un evento a tu endpoint, el body de la solicitud tiene una estructura JSON similar a esta:
+
+```json
+{
+  "event_type": "payment_intent.succeeded",
+  "created_at": "2025-03-15T14:32:00Z",
+  "data": {
+    "id": "pi_xxxxxxxxxxxxxxxx",
+    "amount": 15000,
+    "currency": "GTQ",
+    "status": "succeeded",
+    "customer_email": "cliente@ejemplo.com",
+    "checkout_id": "ch_xxxxxxxxxxxxxxxx",
+    "metadata": {}
+  }
+}
+```
+
+Usa el campo `event_type` para determinar qué acción tomar en tu lógica de negocio.
+
+## Buenas prácticas
+
+<Accordion title="Verifica la firma del webhook">
+  Svix firma cada solicitud con un secreto único por endpoint. Verifica siempre la firma antes de procesar el evento para asegurarte de que la notificación proviene genuinamente de Recurrente y no de un tercero. Puedes encontrar el secreto de firma en la configuración del endpoint dentro del panel de Svix.
+</Accordion>
+
+<Accordion title="Usa siempre HTTPS">
+  Tu endpoint debe estar protegido con HTTPS. Los endpoints con HTTP plano no son seguros para recibir datos de pago y pueden ser rechazados por Svix.
+</Accordion>
+
+<Accordion title="Responde con 200 lo antes posible">
+  Tu servidor debe responder con un código HTTP `200` en menos de unos pocos segundos. Si la respuesta tarda demasiado o devuelve un error, Svix intentará reenviar el evento automáticamente según su política de reintentos. Procesa la lógica pesada de forma asíncrona (en una cola de trabajos) y devuelve el `200` de inmediato.
+</Accordion>
+
+<Accordion title="Maneja entregas duplicadas">
+  En casos raros, un mismo evento puede entregarse más de una vez. Diseña tu lógica para que sea idempotente: si recibes el mismo `id` de evento dos veces, el resultado debe ser el mismo que si lo hubieras recibido solo una vez.
+</Accordion>

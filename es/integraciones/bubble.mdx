@@ -1,0 +1,88 @@
+---
+title: "Cómo integrar Recurrente con Bubble"
+sidebarTitle: "Bubble"
+description: "Agrega el checkout de Recurrente a tu app de Bubble usando el API Connector y configura webhooks para eventos de pago."
+---
+
+Con esta integración puedes conectar tu aplicación de Bubble a Recurrente para lanzar un flujo de checkout al hacer clic en un botón, y luego recibir notificaciones automáticas cuando ocurra un pago, una suscripción nueva u otros eventos. La integración usa el plugin nativo **API Connector** de Bubble y los **backend workflows** para manejar los webhooks.
+
+## Antes de empezar
+
+Asegúrate de tener lo siguiente listo:
+
+- Una cuenta activa en Recurrente con sus llaves de API (ve a [app.recurrente.com](https://app.recurrente.com) → **Mi Cuenta → Desarrolladores y API**)
+- Una aplicación publicada o en desarrollo en Bubble
+
+## Integración
+
+<Steps>
+  <Step title="Crea el API Connector hacia Recurrente">
+    En tu aplicación de Bubble, ve a **Plugins** y agrega el plugin **API Connector** si aún no lo tienes. Haz clic en **Add another API** y llena los datos de la siguiente manera:
+
+    - **API Name:** Recurrente
+    - **Authentication:** Envía tus llaves de API en los headers de autenticación correspondientes
+    - **Endpoint URL:** `https://app.recurrente.com/api/checkouts`
+    - **Method:** POST
+    - **Body (JSON):**
+
+    ```json
+    {
+      "items": [
+        {
+          "price_id": "<priceId>"
+        }
+      ]
+    }
+    ```
+
+    Reemplaza `<priceId>` con el ID del precio del producto que quieres cobrar. Puedes encontrar los IDs de tus precios en el dashboard de Recurrente.
+
+    <Tip>
+      Para obtener tus llaves de API, ingresa a [app.recurrente.com](https://app.recurrente.com) y ve a **Mi Cuenta → Desarrolladores y API**.
+    </Tip>
+  </Step>
+
+  <Step title='Crea un botón "Pagar ahora" en tu página'>
+    Agrega un botón en la página de tu app donde quieras iniciar el checkout. Nómbralo **Pagar ahora** o el texto que prefieras. En el **workflow** del botón, agrega una acción que llame al endpoint de Recurrente que configuraste en el API Connector. Cuando la llamada sea exitosa, redirige al usuario a la URL de checkout que devuelve la API (`checkout_url`).
+
+    Si necesitas asociar el pago a un usuario específico, puedes pasar el `user_id` o el email del usuario como campo adicional en el body de la petición.
+  </Step>
+
+  <Step title="Configura los webhooks para recibir eventos">
+    Para que tu app sepa cuándo se completa un pago o cambia el estado de una suscripción, configura un endpoint de webhook.
+
+    **3a. Crea el backend workflow en Bubble**
+
+    En Bubble, ve a **Backend Workflows** y crea un nuevo workflow. Selecciona **API Endpoint** como trigger. Copia la URL del endpoint que Bubble genera (se verá como `https://tuapp.bubbleapps.io/api/1.1/wf/tu-workflow/initialize`).
+
+    **3b. Registra el endpoint en Recurrente**
+
+    1. En [app.recurrente.com](https://app.recurrente.com), ve a **Mi Cuenta → Desarrolladores y API** y haz clic en **Webhooks**. Serás redirigido al panel de Svix.
+    2. En Svix, haz clic en **Add Endpoint**.
+    3. Pega la URL del backend workflow de Bubble en el campo **Endpoint URL** y haz clic en **Create**.
+
+    <Warning>
+      Luego de inicializar el endpoint, debes editar la URL en Svix y **eliminar `/initialize`** del final. Si no lo haces, Recurrente solo podrá hacer la llamada de inicialización pero no enviará los eventos de pago reales.
+    </Warning>
+
+    **3c. Configura los campos del payload**
+
+    Dentro del backend workflow de Bubble, asegúrate de que el campo `created_at` tenga el tipo de dato **date** para que Bubble lo interprete correctamente.
+
+    **3d. Maneja los tipos de eventos**
+
+    Agrega condiciones en tu workflow para responder a cada tipo de evento según el campo `event_type` del payload:
+
+    | Evento | Descripción |
+    |--------|-------------|
+    | `payment_intent.succeeded` | El pago se completó correctamente |
+    | `payment_intent.failed` | El pago falló o fue rechazado |
+    | `subscription.create` | Se creó una nueva suscripción |
+    | `subscription.past_due` | El cobro de la suscripción está vencido |
+    | `subscription.cancel` | La suscripción fue cancelada |
+
+    Para cada evento, realiza la acción correspondiente en tu base de datos de Bubble: por ejemplo, actualiza el estado del pedido, desbloquea contenido de pago o envía un correo de confirmación.
+  </Step>
+</Steps>
+
+Con esto, tu app de Bubble ya puede lanzar checkouts de Recurrente y reaccionar automáticamente a todos los eventos de pago y suscripción en tiempo real. 🎉

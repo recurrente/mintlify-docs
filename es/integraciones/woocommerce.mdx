@@ -1,0 +1,67 @@
+---
+title: "Cómo instalar el plugin de Recurrente en WooCommerce"
+sidebarTitle: "WooCommerce"
+description: "Acepta pagos con tarjeta en tu tienda WooCommerce conectándola a Recurrente en cinco pasos simples."
+---
+
+El plugin de Recurrente para WooCommerce te permite aceptar pagos con tarjeta de crédito y débito directamente desde tu tienda en línea. Una vez instalado y configurado, tus clientes verán Recurrente como opción de pago en el checkout y recibirás notificaciones en tiempo real sobre cada transacción en tus pedidos de WooCommerce.
+
+<Note>
+  Este plugin fue desarrollado y es mantenido por [TipiCode](https://codingtipi.com) y mejorado por la [comunidad Open Source](https://github.com/TipiCode/Woocommerce-Recurrente). Para integraciones avanzadas o personalizadas, contáctate directamente con [TipiCode](https://codingtipi.com/contact#info).
+</Note>
+
+## Antes de empezar
+
+Asegúrate de tener lo siguiente listo:
+
+- Una cuenta activa en Recurrente
+- Tus llaves de API (las obtendrás en el Paso 3)
+- WordPress con WooCommerce instalado y activo
+
+## Instalación
+
+<Steps>
+  <Step title="Descarga el plugin desde GitHub">
+    Descarga el archivo `.zip` del plugin desde el siguiente enlace:
+
+    [Descargar plugin de Recurrente para WooCommerce](https://github.com/TipiCode/Woocommerce-Recurrente/archive/refs/heads/main.zip)
+
+    Guarda el archivo `.zip` en tu computadora; lo necesitarás en el siguiente paso.
+  </Step>
+
+  <Step title="Sube el plugin a WordPress">
+    En el panel administrativo de WordPress, ve a **Plugins → Añadir nuevo plugin** y luego haz clic en **Subir plugin**. Selecciona el archivo `.zip` que descargaste y haz clic en **Instalar ahora**. Cuando termine, haz clic en **Activar plugin**.
+
+    <Warning>
+      Si recibes un error que indica que el archivo es demasiado grande o un mensaje de **Timeout**, comunícate con tu proveedor de hosting para que aumente el tamaño máximo permitido de carga de archivos.
+    </Warning>
+  </Step>
+
+  <Step title="Obtén tus llaves de API en Recurrente">
+    Ingresa a [app.recurrente.com](https://app.recurrente.com) y ve a **Mi Cuenta → Desarrolladores y API**. Ahí encontrarás tu **llave pública** y tu **llave secreta**. Cópialas; las usarás en el siguiente paso.
+  </Step>
+
+  <Step title="Configura el plugin en WooCommerce">
+    En el panel de WordPress, ve a **WooCommerce → Ajustes → Pagos**. Busca **Recurrente** en la lista de métodos de pago y haz clic en **Gestionar**. Ingresa tu llave pública y tu llave secreta en los campos correspondientes y haz clic en **Guardar los cambios**.
+  </Step>
+
+  <Step title="Configura los webhooks">
+    Para que WooCommerce actualice automáticamente el estado de los pedidos, debes registrar un endpoint de webhook en Recurrente.
+
+    1. En [app.recurrente.com](https://app.recurrente.com), ve a **Mi Cuenta → Desarrolladores y API** y haz clic en **Webhooks**. Serás redirigido al panel de Svix.
+    2. En Svix, haz clic en **Add Endpoint** (esquina superior derecha).
+    3. En el campo **Endpoint URL**, ingresa la URL de tu sitio con el parámetro de WooCommerce:
+
+    ```
+    https://midominio.com?wc-api=recurrente
+    ```
+
+    Reemplaza `midominio.com` con el dominio real de tu tienda.
+
+    4. Haz clic en **Create** para guardar el endpoint.
+
+    Una vez creado, Recurrente enviará notificaciones automáticas a tu sitio cada vez que se complete o falle un pago.
+  </Step>
+</Steps>
+
+¡Listo! Tu tienda WooCommerce ya está conectada a Recurrente y puede procesar pagos con tarjeta. 🎉

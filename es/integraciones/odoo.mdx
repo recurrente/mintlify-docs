@@ -1,0 +1,84 @@
+---
+title: "Cómo instalar el plugin de Recurrente en Odoo"
+sidebarTitle: "Odoo"
+description: "Configura Recurrente como proveedor de pagos en Odoo 15, 16, 17 o 18 y acepta tarjetas en tu sitio web."
+---
+
+El plugin de Recurrente para Odoo te permite aceptar pagos con tarjeta de crédito y débito directamente en tu sitio web de Odoo, así como generar enlaces de pago automáticos para tus cotizaciones. El proceso de instalación toma alrededor de 15 minutos y no requiere conocimientos avanzados de programación.
+
+<Note>
+  Este plugin fue desarrollado y es mantenido por [TipiCode](https://codingtipi.com). Para integraciones avanzadas o personalizadas en tu ambiente de Odoo, contáctate directamente con [TipiCode](https://codingtipi.com/contact#info).
+</Note>
+
+## Versiones compatibles
+
+El plugin está disponible para Odoo 15, 16, 17 y 18. Antes de comenzar, descarga el archivo correspondiente a tu versión:
+
+<CardGroup cols={2}>
+  <Card title="Odoo 15.0" icon="download" href="https://tipi-pod.sfo3.cdn.digitaloceanspaces.com/odoo/recurrente/Odoo-Recurrente-15.0.zip">
+    Descargar plugin para Odoo 15
+  </Card>
+  <Card title="Odoo 16.0" icon="download" href="https://tipi-pod.sfo3.cdn.digitaloceanspaces.com/odoo/recurrente/Odoo-Recurrente-16.0.zip">
+    Descargar plugin para Odoo 16
+  </Card>
+  <Card title="Odoo 17.0" icon="download" href="https://tipi-pod.sfo3.cdn.digitaloceanspaces.com/odoo/recurrente/Odoo-Recurrente-17.0.zip">
+    Descargar plugin para Odoo 17
+  </Card>
+  <Card title="Odoo 18.0" icon="brands github" href="https://github.com/TipiCode/Odoo-Recurrente/tree/18.0">
+    Ver plugin para Odoo 18 en GitHub
+  </Card>
+</CardGroup>
+
+## Antes de empezar
+
+Asegúrate de tener lo siguiente listo:
+
+- Una cuenta activa en Recurrente
+- Odoo instalado con el módulo de Sitio Web activo
+- El archivo `.zip` del plugin descargado para tu versión de Odoo
+
+## Instalación
+
+<Steps>
+  <Step title="Activa el Modo Desarrollador en Odoo">
+    Ve a los **Ajustes** de Odoo y desplázate hacia abajo hasta encontrar la sección **Herramientas de Desarrollador**. Haz clic en **Activar Modo Desarrollador**. Este modo es necesario para subir módulos personalizados.
+  </Step>
+
+  <Step title="Sube el plugin a Aplicaciones">
+    Ve al módulo de **Aplicaciones** en Odoo. Haz clic en el menú superior y selecciona la opción para subir o instalar desde un archivo local. Sube el archivo `.zip` que descargaste y luego haz clic en **Actualizar lista de aplicaciones** para que Odoo reconozca el nuevo módulo.
+  </Step>
+
+  <Step title="Activa el módulo de Recurrente">
+    Busca **Recurrente** en la lista de aplicaciones. Cuando aparezca el módulo, haz clic en **Activar**. Odoo instalará el módulo automáticamente.
+  </Step>
+
+  <Step title="Activa Recurrente en el módulo de Sitio Web">
+    Ve al módulo de **Sitio Web** de Odoo. Dentro de las configuraciones, selecciona **Proveedores de pago**. Busca **Recurrente** en la lista y haz clic en **Activar**.
+  </Step>
+
+  <Step title="Obtén tus llaves de API en Recurrente">
+    Ingresa a [app.recurrente.com](https://app.recurrente.com) y ve a **Mi Cuenta → Desarrolladores y API**. Copia tu **llave pública** y tu **llave secreta**; las necesitarás en el Paso 7.
+  </Step>
+
+  <Step title="Configura los webhooks">
+    Para que Odoo reciba notificaciones de pago en tiempo real, debes registrar un endpoint de webhook en Recurrente.
+
+    1. En [app.recurrente.com](https://app.recurrente.com), ve a **Mi Cuenta → Desarrolladores y API** y haz clic en **Webhooks**. Serás redirigido al panel de Svix.
+    2. En Svix, haz clic en **Add Endpoint** (esquina superior derecha).
+    3. En el campo **Endpoint URL**, ingresa la URL de tu instancia de Odoo con la ruta del webhook:
+
+    ```
+    https://midominio.com/payment/recurrente/webhook
+    ```
+
+    Reemplaza `midominio.com` con el dominio real de tu instancia de Odoo.
+
+    4. Haz clic en **Create** para guardar el endpoint.
+  </Step>
+
+  <Step title="Ingresa tus llaves de API en Odoo">
+    De regreso en Odoo, ve a **Sitio Web → Configuración → Proveedores de pago** y haz clic sobre **Recurrente**. En la vista de configuración, ingresa tu **llave pública** y tu **llave secreta** de Recurrente en los campos correspondientes. Guarda los cambios.
+  </Step>
+</Steps>
+
+¡Listo! Tu instancia de Odoo ya está configurada para recibir pagos con tarjeta de crédito y débito a través de Recurrente. Puedes aceptar pagos desde tu sitio web y también generar enlaces de pago automáticos desde tus cotizaciones. 🎉

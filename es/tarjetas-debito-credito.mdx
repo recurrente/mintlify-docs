@@ -1,0 +1,132 @@
+---
+title: "Acepta tarjetas de débito y crédito en Recurrente"
+sidebarTitle: "Tarjetas"
+description: "Acepta Visa y Mastercard locales e internacionales, entiende cómo funciona la moneda y qué hacer cuando un pago falla."
+---
+
+Recurrente te permite cobrar con tarjetas de débito y crédito **Visa y Mastercard**, tanto emitidas en Guatemala como en cualquier otro país. No necesitas configuración adicional: en cuanto tienes habilitados los pagos con tarjeta, tu link de cobro ya está listo para recibir pagos locales e internacionales.
+
+## Tarjetas aceptadas
+
+<CardGroup cols={2}>
+  <Card title="Visa" icon="credit-card">
+    Débito y crédito, emitidas en Guatemala o en el extranjero.
+  </Card>
+  <Card title="Mastercard" icon="credit-card">
+    Débito y crédito, emitidas en Guatemala o en el extranjero.
+  </Card>
+</CardGroup>
+
+<Note>
+  Recurrente **no acepta** American Express ni tarjetas de marca propia de bancos locales.
+</Note>
+
+## Moneda del cobro: GTQ vs. USD
+
+El cargo siempre se procesa en la moneda que tú configuraste al crear el cobro, sin importar el país de origen de la tarjeta de tu cliente.
+
+- Si configuras el cobro en **quetzales (GTQ)**, Recurrente procesa el pago en GTQ.
+- Si configuras el cobro en **dólares (USD)**, Recurrente procesa el pago en USD.
+
+Cuando el cliente usa una tarjeta emitida en otro país, su banco puede mostrarle el cargo convertido a su moneda local en el estado de cuenta. Esa conversión, la tasa de cambio aplicada y cualquier cargo por conversión los define el banco emisor — Recurrente no interviene en ese proceso.
+
+**Recurrente siempre te acredita el monto configurado, menos la comisión correspondiente.**
+
+### Ejemplos
+
+| Configuración del cobro | Tarjeta del cliente | Monto procesado por Recurrente |
+|---|---|---|
+| Q 500 | Guatemala (GTQ) | Q 500 |
+| USD 50 | EE. UU. (USD) | USD 50 |
+| Q 500 | EE. UU. (USD) | Q 500 (su banco convierte a USD) |
+
+## Cobrar a clientes fuera de Guatemala
+
+No necesitas activar nada especial para recibir pagos internacionales. Si tienes habilitados los pagos con tarjeta, comparte tu link de pago con clientes en cualquier país que tengan una tarjeta Visa o Mastercard.
+
+<Tip>
+  Configura tu cobro en USD si tus clientes internacionales pagan en dólares — así evitas que su banco realice una doble conversión.
+</Tip>
+
+## Pagos fallidos: causas y soluciones
+
+Los pagos con tarjeta pueden fallar por distintas razones. Aquí encontrarás los mensajes más comunes y qué hacer en cada caso.
+
+<Accordion title="&quot;Tu banco ha rechazado la transacción.&quot;">
+  El banco del cliente no autorizó el cargo. Esto puede ocurrir porque la transacción se sale de sus patrones habituales de consumo, porque el banco restringe pagos al extranjero, o por problemas técnicos del banco.
+
+  **Solución:** pídele al cliente que contacte a su banco para autorizar la transacción o que intente con otra tarjeta.
+</Accordion>
+
+<Accordion title="&quot;No se pudo autenticar la transacción.&quot;">
+  Recurrente utiliza 3D Secure (3DS) para validar cada transacción y reducir fraudes. El banco del cliente requirió un código de autenticación (SMS, correo o app de token) y el cliente no completó ese paso.
+
+  **Solución:** indica al cliente que complete el proceso de verificación que le solicite su banco. Si el banco no muestra la pantalla de autenticación, el cliente debe contactar a su banco o intentar con otra tarjeta.
+</Accordion>
+
+<Accordion title="&quot;Tu intento de pago fue interrumpido.&quot;">
+  La ventana de autenticación 3DS se cerró antes de completarse (por ejemplo, si el cliente cerró la pestaña o perdió conexión). Si la autenticación no se completa en 60 segundos, el sistema cancela el intento.
+
+  **Solución:** pídele al cliente que haga clic en el enlace para iniciar un nuevo intento de pago desde el principio. Si persiste, sugiérele usar otra tarjeta o contactar a su banco para habilitar transacciones en línea.
+</Accordion>
+
+<Accordion title="&quot;Tu sesión de pago ha expirado.&quot;">
+  El cliente tardó más de 60 minutos en la página de pago sin completar la transacción. Por seguridad, la sesión expiró.
+
+  **Solución:** el cliente debe volver a ingresar los datos de su tarjeta. Si el problema continúa, pídele que abra el link de pago en una ventana nueva.
+</Accordion>
+
+<Accordion title="&quot;Esta tarjeta no es aceptada por Recurrente.&quot;">
+  La tarjeta no es Visa ni Mastercard, o — en cobros con cuotas — pertenece a uno de los bancos excluidos para pagos en cuotas (BAC, Banco Azteca, Cuscatlán o Banco Antigua).
+
+  **Solución:** verifica que la tarjeta sea Visa o Mastercard. Para cobros en cuotas, el cliente debe usar una tarjeta de un banco diferente.
+</Accordion>
+
+<Accordion title="Errores de datos: CVV, fecha o número de tarjeta incorrectos">
+  Estos errores ocurren cuando el cliente ingresa información equivocada:
+
+  - **CVV inválido** — el código de 3 dígitos fue escrito incorrectamente.
+  - **Fecha incorrecta** — la fecha de expiración no coincide con la tarjeta.
+  - **Número de tarjeta inválido** — los dígitos fueron ingresados con un error.
+  - **Tarjeta no habilitada para transacciones en línea** — el banco bloqueó las compras en línea para esa tarjeta.
+
+  **Solución:** el cliente debe revisar y corregir los datos, o contactar a su banco si la tarjeta está bloqueada para uso en línea.
+</Accordion>
+
+## Pagos en verificación
+
+Un pago queda en estado **"verificación"** cuando Recurrente detecta un movimiento inusual en la tarjeta. Como medida de seguridad para tu negocio, la plataforma le solicita al tarjetahabiente documentación adicional: foto de su identificación, de su tarjeta y una selfie.
+
+- El cliente tiene **24 horas** para completar la verificación.
+- Si no la completa en ese plazo, el monto se devuelve automáticamente a la tarjeta original.
+- Para reducir la frecuencia de estos casos, verifica tu cuenta en **Ajustes → Validación de documentos**.
+
+<Warning>
+  Si tu cliente no recibe la solicitud de verificación, pídele que revise su correo electrónico o que contacte a soporte@recurrente.com.
+</Warning>
+
+## Reembolsos
+
+Para devolver un pago a un cliente, ve a la sección **Actividad** en tu cuenta de Recurrente, busca el cobro correspondiente y selecciona la opción de reembolso.
+
+<Note>
+  Los pagos realizados **en cuotas** no pueden reembolsarse desde la plataforma. Contacta a soporte@recurrente.com para gestionar casos de cuotas.
+</Note>
+
+## Preguntas frecuentes sobre tarjetas internacionales
+
+<Accordion title="¿Necesito activar algo para recibir tarjetas de otros países?">
+  No. Si los pagos con tarjeta están habilitados en tu cuenta, automáticamente aceptas tarjetas Visa y Mastercard de cualquier país.
+</Accordion>
+
+<Accordion title="¿Recurrente procesa en la moneda de la tarjeta del cliente?">
+  No. Recurrente procesa siempre en la moneda que configuraste en el cobro (GTQ o USD). La conversión a la moneda del cliente la realiza el banco emisor de la tarjeta.
+</Accordion>
+
+<Accordion title="¿Hay algún cargo adicional por recibir tarjetas internacionales?">
+  No hay cargos adicionales de parte de Recurrente. La comisión es la misma independientemente del país de emisión de la tarjeta. El banco del cliente puede aplicar sus propios cargos por conversión de moneda.
+</Accordion>
+
+<Accordion title="¿Puedo aceptar American Express?">
+  No. Actualmente Recurrente solo acepta Visa y Mastercard.
+</Accordion>

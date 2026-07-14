@@ -1,0 +1,187 @@
+---
+title: "Organizaciones: administra cuentas y sucursales juntas"
+sidebarTitle: "Organizaciones"
+description: "Agrupa varias cuentas comerciales en una organización para ver saldos consolidados, gestionar equipos y administrar sucursales desde un solo lugar."
+---
+
+Las **Organizaciones** te permiten agrupar varias cuentas comerciales de Recurrente en un único panel. Es ideal si tienes varias sucursales, marcas o líneas de negocio distintas y quieres tener visibilidad global sin mezclar la operación de cada cuenta. Cada cuenta sigue siendo independiente: mantiene sus propios cobros, balance, retiros, productos, clientes y configuración.
+
+## Qué puedes hacer desde una organización
+
+<CardGroup cols={2}>
+  <Card title="Saldos consolidados" icon="chart-bar">
+    Visualiza los saldos en quetzales y dólares de todas tus cuentas en un solo panel.
+  </Card>
+  <Card title="Actividad unificada" icon="list">
+    Revisa la actividad de todas las cuentas de tu organización desde un mismo lugar.
+  </Card>
+  <Card title="Reportes en CSV y Excel" icon="file-spreadsheet">
+    Descarga reportes consolidados para analizar el desempeño de tu negocio.
+  </Card>
+  <Card title="Gestión de equipo" icon="users">
+    Invita miembros y asígnales roles para que accedan a las cuentas según sus responsabilidades.
+  </Card>
+  <Card title="Copiar documentos de verificación" icon="copy">
+    Reutiliza los documentos de una cuenta ya verificada en otras cuentas de la misma organización.
+  </Card>
+  <Card title="Agregar o quitar cuentas" icon="building">
+    Gestiona qué cuentas forman parte de tu organización en cualquier momento.
+  </Card>
+</CardGroup>
+
+## Cómo crear una organización
+
+<Steps>
+  <Step title="Entra a una cuenta comercial">
+    Inicia sesión en una de tus cuentas comerciales de Recurrente.
+  </Step>
+  <Step title="Abre Configuración y selecciona Organización">
+    Dirígete a **Configuración** en el menú lateral y haz clic en **Organización**.
+  </Step>
+  <Step title="Ingresa el nombre de tu empresa o marca">
+    Escribe el nombre de tu empresa, grupo o marca para identificar la organización.
+  </Step>
+  <Step title="Crea la organización">
+    Haz clic en **Crear organización**. La cuenta desde la que creas la organización se agrega automáticamente y tú quedas como **Dueño**.
+  </Step>
+</Steps>
+
+## Cómo agregar más cuentas o sucursales
+
+Para usar las organizaciones con varias sucursales, crea una cuenta comercial por cada una y luego agrúpalas:
+
+<Steps>
+  <Step title="Abre el panel de tu organización">
+    Desde el selector de cuentas, elige tu organización bajo **Tus organizaciones**.
+  </Step>
+  <Step title="Entra a la sección Cuentas">
+    Dentro del panel de la organización, abre la pestaña **Cuentas**.
+  </Step>
+  <Step title="Selecciona la cuenta que quieres agregar">
+    Elige la cuenta comercial que deseas incorporar a la organización.
+  </Step>
+</Steps>
+
+<Warning>
+  Para agregar una cuenta debes ser administrador de esa cuenta. Además, la cuenta no puede pertenecer ya a otra organización.
+</Warning>
+
+## Roles de la organización
+
+Los miembros de tu organización tienen roles específicos que determinan qué pueden hacer en el panel consolidado.
+
+<Accordion title="Dueño">
+  Es quien crea la organización. Tiene acceso completo: puede agregar o quitar cuentas, administrar el equipo y cambiar roles de cualquier miembro.
+
+  **Úsalo para:** el propietario o la persona principal a cargo de toda la operación del grupo.
+</Accordion>
+
+<Accordion title="Administrador">
+  Puede administrar miembros del equipo de la organización, acceder a las cuentas que forman parte de ella y usar funciones de reportes y copia de documentos.
+
+  **Úsalo para:** gerentes o personas responsables de la administración general del grupo de cuentas.
+</Accordion>
+
+<Accordion title="Solo lectura">
+  Puede ver la información y los reportes de la organización, pero no puede hacer cambios ni administrar miembros.
+
+  **Úsalo para:** contadores, auditores o socios que necesitan visibilidad sobre el negocio sin permisos de edición.
+</Accordion>
+
+## Cómo agregar un miembro al equipo de la organización
+
+<Steps>
+  <Step title="Entra al panel de la organización">
+    Desde el selector de cuentas, abre tu organización bajo **Tus organizaciones**.
+  </Step>
+  <Step title="Abre la sección Equipo">
+    Haz clic en la pestaña **Equipo** dentro del panel de la organización.
+  </Step>
+  <Step title="Haz clic en Añadir">
+    Selecciona la opción para agregar un nuevo miembro al equipo.
+  </Step>
+  <Step title="Ingresa los datos del miembro">
+    Escribe el nombre completo y el correo electrónico de la persona que quieres invitar.
+  </Step>
+  <Step title="Asigna un rol">
+    Selecciona el rol que corresponde a las responsabilidades de esa persona: **Administrador** o **Solo lectura**.
+  </Step>
+  <Step title="Confirma la invitación">
+    Haz clic en **Añadir**. La persona recibirá la invitación en su correo electrónico.
+  </Step>
+</Steps>
+
+## Roles dentro de cada cuenta
+
+Además de los roles de organización, cada cuenta individual tiene su propio sistema de roles para el equipo que opera directamente en ella. Estos se administran desde **Configuración > Equipo** dentro de la cuenta específica.
+
+<Accordion title="Administrador de cuenta">
+  Tiene acceso completo a la cuenta. Puede administrar configuración, agregar o quitar miembros, crear cobros, operar POS, hacer reembolsos, gestionar tienda y productos, manejar suscripciones, ver actividad, usar llaves API y realizar transferencias o retiros.
+
+  **Úsalo para:** dueños, gerentes o personas responsables de la operación completa de una cuenta.
+</Accordion>
+
+<Accordion title="Operador">
+  Puede crear cobros, operar POS, hacer reembolsos, gestionar tienda y productos, manejar suscripciones y ver la actividad de la cuenta.
+
+  **No puede:** administrar la cuenta o el equipo, realizar transferencias o retiros, ni acceder a llaves API.
+
+  **Úsalo para:** personas que atienden clientes, gestionan pagos, productos o suscripciones, pero no deben tener acceso administrativo ni financiero completo.
+</Accordion>
+
+<Accordion title="Cajero">
+  Puede crear cobros, operar POS y realizar acciones relacionadas con el cierre de lote.
+
+  **No puede:** hacer reembolsos, administrar productos o tienda, manejar suscripciones, transferir fondos, editar configuración ni administrar miembros.
+
+  **Úsalo para:** personas que solo necesitan cobrar en mostrador, usar el POS o registrar pagos.
+</Accordion>
+
+<Accordion title="Solo lectura (cuenta)">
+  Puede consultar la información de la cuenta sin crear, editar ni eliminar nada.
+
+  **No puede:** crear cobros, operar POS, hacer reembolsos, administrar productos, manejar suscripciones, transferir fondos, editar configuración, usar llaves API ni administrar miembros.
+
+  **Úsalo para:** contadores, auditores, socios o supervisores que necesitan visibilidad sin permisos de edición.
+</Accordion>
+
+<Note>
+  Los permisos se suman: si asignas más de un rol a una persona, tendrá las funciones permitidas por cada uno de los roles seleccionados.
+</Note>
+
+## Cómo navegar entre cuentas y organizaciones
+
+Cuando perteneces a una organización, la encuentras en el **selector de cuentas** bajo la sección **Tus organizaciones**. Desde ahí puedes:
+
+- Abrir el panel consolidado de la organización para ver saldos globales, actividad y reportes.
+- Entrar directamente a cualquier cuenta individual para administrar su operación diaria.
+
+<Tip>
+  Si quitas a un miembro de una cuenta pero todavía aparece con acceso, verifica si también tiene acceso a esa cuenta a través de la organización. En ese caso, gestiona su acceso desde **Organización > Equipo**.
+</Tip>
+
+## Copiar documentos de verificación
+
+Si tienes una cuenta ya verificada dentro de la organización, puedes reutilizar sus documentos en otras cuentas del mismo grupo desde la opción **Copiar documentos** del panel de la organización.
+
+<Warning>
+  Antes de confirmar la copia, revisa que la información corresponda a la cuenta destino. Los documentos existentes de esa cuenta pueden ser reemplazados.
+</Warning>
+
+## Preguntas frecuentes
+
+<Accordion title="¿Las organizaciones mezclan los fondos de las cuentas?">
+  No. Cada cuenta mantiene sus propios fondos, balance, retiros, productos y clientes de forma completamente independiente. La organización solo ofrece una vista consolidada de información.
+</Accordion>
+
+<Accordion title="¿Necesito una cuenta comercial para usar organizaciones?">
+  Sí. La funcionalidad de organizaciones está disponible exclusivamente para cuentas comerciales de Recurrente.
+</Accordion>
+
+<Accordion title="¿Un miembro puede tener más de un rol en una cuenta?">
+  Sí. Puedes asignar varios roles a una misma persona y sus permisos se sumarán. Por ejemplo, si asignas Cajero y Operador, la persona podrá hacer las acciones de ambos roles.
+</Accordion>
+
+<Accordion title="¿Puedo cambiar el rol de un miembro después de agregarlo?">
+  Sí, siempre que tengas el rol de Administrador en la cuenta o en la organización. Ve a **Configuración > Equipo** (o a **Organización > Equipo**), abre el menú del miembro y elige **Editar**.
+</Accordion>

@@ -1,0 +1,128 @@
+---
+title: "Links de pago: cobra con un enlace directo"
+sidebarTitle: "Links de Pago"
+description: "Aprende a crear, compartir y gestionar links de pago en Recurrente, incluyendo links dinámicos con monto y moneda en el URL."
+---
+
+Los links de pago son enlaces únicos que llevan a tus clientes a una página de checkout segura, lista para pagar con tarjeta u otros métodos habilitados. Tú defines el monto, creas el link y lo compartes por el canal que prefieras: WhatsApp, correo, redes sociales o donde sea más cómodo para tu cliente.
+
+## Cómo crear un link de pago
+
+<Steps>
+  <Step title="Ve a la pantalla de Cobrar">
+    Abre la app de Recurrente y selecciona **Cobrar** en el menú principal.
+  </Step>
+  <Step title="Ingresa el monto">
+    Escribe el monto que quieres cobrar en el campo de la pantalla principal. Puedes elegir la moneda (GTQ o USD) según lo que necesites.
+  </Step>
+  <Step title="Selecciona métodos de pago">
+    Elige qué métodos de pago quieres ofrecer al cliente: tarjeta de crédito o débito, cuotas, transferencia bancaria, etc.
+  </Step>
+  <Step title="Genera el link">
+    Toca **Cobrar** o **Generar link**. Recurrente creará el link de pago de forma inmediata.
+  </Step>
+  <Step title="Comparte el link">
+    Envía el link por **WhatsApp**, cópialo para pegarlo en otro canal, o muestra el código QR directamente al cliente.
+  </Step>
+</Steps>
+
+<Note>
+  Puedes cobrar en **GTQ (quetzales)** o **USD (dólares)**. Si tu cuenta tiene ambas monedas habilitadas, selecciona la que corresponda antes de generar el link.
+</Note>
+
+## Cómo ver y gestionar tus links creados
+
+Todos los links de pago que hayas generado desde la pantalla de Cobrar quedan guardados en tu historial. Para acceder a ellos:
+
+1. Ve a **Cobrar** y toca el botón **⋯** (tres puntos) en la esquina superior izquierda.
+2. Selecciona **Links de pago** en el menú.
+3. Desde ahí puedes ver el estado de cada link, copiarlo para compartirlo nuevamente o eliminarlo cuando ya no lo necesites.
+
+## Links dinámicos: monto y moneda en el URL
+
+Si tu sitio web ya conoce el precio del producto o servicio que quieres cobrar, puedes construir el link de pago de forma dinámica incluyendo el monto y la moneda directamente en la URL, sin tener que crear un link manual para cada caso.
+
+### Formato
+
+```
+https://app.recurrente.com/s/{tu-cuenta}/pagar/{monto}/{moneda}
+```
+
+También puedes omitir la moneda si quieres usar la moneda predeterminada de tu cuenta:
+
+```
+https://app.recurrente.com/s/{tu-cuenta}/pagar/{monto}
+```
+
+### Ejemplos
+
+```
+# Cobrar Q350
+https://app.recurrente.com/s/mi-tienda/pagar/350/GTQ
+
+# Cobrar USD 50
+https://app.recurrente.com/s/mi-tienda/pagar/50/USD
+
+# Cobrar Q1,200 (moneda predeterminada)
+https://app.recurrente.com/s/mi-tienda/pagar/1200
+```
+
+<Note>
+  Reemplaza `mi-tienda` con el **slug** real de tu cuenta en Recurrente. Puedes encontrarlo en la URL de tu tienda en línea. Antes de enviarlo a un cliente, prueba el link con un monto pequeño para confirmar que abre el checkout correcto.
+</Note>
+
+### Cuándo usar links dinámicos
+
+Esta opción es ideal cuando:
+
+- Tu sitio web tiene productos con precios variables y quieres redirigir al cliente al checkout sin configuración adicional en Recurrente.
+- Ofreces servicios cotizados a medida y el monto cambia en cada venta.
+- Quieres integrar Recurrente en tu flujo de ventas sin usar la API.
+
+<Tip>
+  Si necesitas funcionalidades más avanzadas — como guardar el nombre del producto, enviar metadata interna, cobrar múltiples ítems o conciliar pagos automáticamente — considera usar la [API de checkouts de Recurrente](/es/integraciones) en lugar de los links dinámicos.
+</Tip>
+
+## Cómo emitir un reembolso
+
+Si necesitas devolver un pago a un cliente, puedes hacerlo directamente desde tu historial de actividad.
+
+<Steps>
+  <Step title="Ve a Actividad">
+    En el menú lateral, selecciona **Actividad** y localiza la transacción que quieres reembolsar.
+  </Step>
+  <Step title="Abre los detalles">
+    Toca la transacción para ver su detalle completo.
+  </Step>
+  <Step title="Selecciona Reembolsar">
+    Toca el ícono de tres puntos **⋮** en la esquina superior derecha y selecciona **Reembolsar**.
+  </Step>
+  <Step title="Confirma la acción">
+    Confirma el reembolso. Recurrente generará automáticamente un comprobante que puedes compartir con tu cliente.
+  </Step>
+</Steps>
+
+<Warning>
+  Ten en cuenta estos límites antes de procesar un reembolso:
+  - Solo puedes reembolsar dentro de los **30 días** posteriores a la transacción.
+  - Los reembolsos siempre son por el **100% del monto** pagado (no se hacen reembolsos parciales).
+  - Necesitas tener **saldo suficiente** en tu balance de Recurrente para cubrir el monto.
+  - La comisión cobrada por Recurrente **no se reembolsa**; ese costo lo asume el comercio.
+  - **No es posible reembolsar pagos realizados en cuotas.**
+</Warning>
+
+El dinero tarda entre **3 y 25 días hábiles** en reflejarse en la tarjeta del cliente, dependiendo del banco emisor.
+
+## Preguntas frecuentes
+
+<Accordion title="¿Un link de pago tiene fecha de vencimiento?">
+  Los links de pago no vencen automáticamente. Permanecen activos hasta que los elimines manualmente desde el historial de Links de pago.
+</Accordion>
+
+<Accordion title="¿Puedo reutilizar el mismo link para varios clientes?">
+  Sí. Un link de pago puede usarse múltiples veces. Si quieres que solo se pueda pagar una vez, crea el link como producto en tu tienda en línea y controla el inventario.
+</Accordion>
+
+<Accordion title="¿Puedo ofrecer cuotas en un link de pago?">
+  Sí, siempre que hayas activado los pagos en cuotas en tu cuenta y el monto sea en GTQ. Consulta la sección de [Pagos en cuotas](/es/pagos-en-cuotas) para más detalles.
+</Accordion>

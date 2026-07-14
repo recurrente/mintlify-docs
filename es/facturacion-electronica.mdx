@@ -1,0 +1,108 @@
+---
+title: "Facturación electrónica FEL en Recurrente"
+sidebarTitle: "Facturación FEL"
+description: "Habilita la factura electrónica FEL en Recurrente, descarga tu firma de SAT y configura la emisión automática o manual de facturas."
+---
+
+La Factura Electrónica en Línea (FEL) es el sistema de facturación digital obligatorio en Guatemala, administrado por la SAT. Con Recurrente puedes emitir facturas electrónicas automáticamente a tus clientes cada vez que reciben un pago exitoso. Para activarlo, primero debes completar dos pasos en el portal de la SAT: habilitar a InFile como certificador y generar tu firma electrónica.
+
+<Note>
+  Para emitir facturas electrónicas, tu NIT debe estar activo en la SAT y debes estar inscrito en el régimen de Factura Electrónica en Línea (FEL). Si tienes dudas sobre tu situación fiscal, consulta con tu contador antes de activar esta función.
+</Note>
+
+---
+
+## Paso 1 — Obtén tu firma electrónica en la SAT
+
+Antes de configurar la facturación en Recurrente, debes habilitar a **InFile** como tu certificador y descargar tu **firma electrónica (.pfx)** desde la Agencia Virtual de la SAT.
+
+⏱️ Tiempo estimado: menos de 10 minutos. Ten a la mano tu usuario y contraseña de la Agencia Virtual SAT.
+
+<Steps>
+  <Step title="Ingresa a la Agencia Virtual de la SAT">
+    Abre tu navegador y ve a **portal.sat.gob.gt**. Haz clic en el ícono de **Agencia Virtual** para abrir la pantalla de inicio de sesión.
+  </Step>
+  <Step title="Inicia sesión">
+    Ingresa tu número de **NIT** como usuario y tu contraseña, luego haz clic en **Iniciar Sesión**.
+  </Step>
+  <Step title="Abre el menú principal">
+    Una vez dentro, haz clic en el ícono de menú (**☰**) en la esquina superior izquierda.
+  </Step>
+  <Step title="Navega a FEL">
+    Haz clic en **Servicios Tributarios** para expandir las opciones y selecciona **Factura Electrónica en Línea (FEL)**.
+  </Step>
+  <Step title="Habilita a InFile como certificador">
+    En el submenú de FEL, haz clic en **Acreditación de Certificadores**. Busca la fila **InFile - 12521337**, cambia el estado a **Acreditado** y guarda. Si InFile ya aparece como "Acreditado", omite este paso.
+  </Step>
+  <Step title="Genera tu firma electrónica">
+    En el submenú de FEL, selecciona **Generar Firma Electrónica (Restablecer Contraseña)**.
+
+    - En el primer desplegable, selecciona **Otros certificadores de DTE (terceros)**.
+    - En **"Contraseña asociada"**, ingresa una contraseña segura que puedas recordar.
+    - Confirma la contraseña en el segundo campo y haz clic en **Generar y descargar firma**.
+
+    Se descargará un archivo con extensión **.pfx** a tu computadora.
+  </Step>
+</Steps>
+
+<Note>
+  Guarda el archivo **.pfx** y su contraseña en un lugar seguro. Los necesitarás para activar la facturación en Recurrente. La contraseña del certificado puede ser distinta a la contraseña de tu Agencia Virtual SAT.
+</Note>
+
+---
+
+## Paso 2 — Activa la facturación en Recurrente
+
+Con tu firma electrónica lista, activa la facturación dentro de Recurrente. Tienes dos opciones:
+
+<Tabs>
+  <Tab title="Activación automática">
+    La forma más rápida: solo necesitas la contraseña de tu Agencia Virtual SAT. Recurrente configura todo por ti, sin que tengas que subir ningún archivo.
+
+    <Steps>
+      <Step title="Abre Facturas automáticas">
+        En Recurrente, ve a **Configuración → Facturación → Facturas automáticas**. También puedes encontrar la opción en la sección **Más para ti** de tu cuenta.
+      </Step>
+      <Step title="Ingresa tu contraseña SAT">
+        Escribe la contraseña de tu Agencia Virtual SAT y haz clic en **Activar facturación**.
+      </Step>
+      <Step title="Espera la confirmación">
+        Recurrente configurará la facturación automáticamente. Verás el estado **En proceso**. Cuando esté lista, el estado cambiará a **Activo** y recibirás una confirmación por correo.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Activación manual (con archivo .pfx)">
+    Usa esta opción si prefieres no ingresar tu contraseña SAT o si la activación automática no completó el proceso.
+
+    <Steps>
+      <Step title="Abre el flujo manual">
+        En Recurrente, ve a **Configuración → Facturación → Facturas automáticas**. Debajo del campo de contraseña SAT, haz clic en **Descarga tu firma y súbela manualmente**.
+      </Step>
+      <Step title="Sube tu firma electrónica">
+        - Sube tu archivo de firma electrónica **.pfx**.
+        - Ingresa la **contraseña del certificado PFX** (la que creaste en la SAT al generar la firma).
+        - Haz clic en **Activar facturación**.
+      </Step>
+      <Step title="Espera la confirmación">
+        Recurrente validará el archivo y activará la facturación. Cuando esté lista, recibirás una confirmación por correo y tus facturas se emitirán automáticamente por cada pago exitoso.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+---
+
+## Costos y obligaciones de facturación
+
+<CardGroup cols={2}>
+  <Card title="Facturación a tus clientes" icon="receipt">
+    Con la facturación activa, Recurrente emite y envía una factura electrónica a tu cliente por cada pago exitoso. El costo es de **Q0.25 por factura emitida**.
+  </Card>
+  <Card title="Factura de Recurrente a ti" icon="file-invoice">
+    Al final de cada mes, Recurrente te envía una **factura electrónica** por el monto total de comisiones cobradas sobre tus transacciones durante el mes.
+  </Card>
+</CardGroup>
+
+<Note>
+  Es tu responsabilidad cumplir con tus obligaciones tributarias generadas por las transacciones que realices en Recurrente. Si vendes productos o servicios, debes emitir factura a tus clientes según la normativa guatemalteca.
+</Note>
