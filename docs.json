@@ -114,6 +114,17 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Novedades",
+        "groups": [
+          {
+            "group": "2026",
+            "pages": [
+              "es/novedades/2026-07-14"
+            ]
+          }
+        ]
       }
     ]
   }

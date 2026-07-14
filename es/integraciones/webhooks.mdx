@@ -1,7 +1,7 @@
 ---
 title: "Webhooks: recibe notificaciones de pago en tiempo real"
 sidebarTitle: "Webhooks"
-description: "Aprende a registrar un endpoint de webhook en Recurrente para recibir notificaciones automáticas de pagos completados, fallidos y cambios en suscripciones."
+description: "Registra un endpoint de webhook en Recurrente para recibir notificaciones en tiempo real de pagos, suscripciones, retiros, reembolsos y disputas."
 ---
 
 Los webhooks son notificaciones HTTP que Recurrente envía automáticamente a tu servidor cada vez que ocurre un evento importante en tu cuenta, como un pago completado, un pago fallido o un cambio en el estado de una suscripción. En lugar de tener que consultar la API periódicamente, tu servidor recibe la información en tiempo real y puede reaccionar de inmediato.
@@ -34,13 +34,46 @@ Los webhooks son notificaciones HTTP que Recurrente envía automáticamente a tu
 
 ## Eventos disponibles
 
-| Evento | Descripción |
-|--------|-------------|
-| `payment_intent.succeeded` | Un pago se completó correctamente |
-| `payment_intent.failed` | Un pago falló o fue rechazado |
-| `subscription.create` | Se creó una nueva suscripción |
-| `subscription.past_due` | El cobro de una suscripción está vencido |
-| `subscription.cancel` | Una suscripción fue cancelada |
+Recurrente emite 46 tipos de eventos. Puedes verlos todos, con su esquema y un ejemplo, en la pestaña **Testing** del panel de Svix.
+
+### Eventos de pago (`intent.*`)
+
+| Evento | Cuándo se emite |
+|--------|-----------------|
+| `intent.succeeded` | Cobro exitoso (cualquier método de pago). |
+| `intent.pending` | Cobro iniciado o pendiente (transferencia, cripto). |
+| `intent.failed` | Cobro fallido. |
+| `intent.canceled` | Intent cancelado. |
+| `intent.paid` | Pago con balance: llega a la cuenta pagadora. |
+
+### Eventos de suscripción
+
+| Evento | Cuándo se emite |
+|--------|-----------------|
+| `subscription.create` | Se creó una nueva suscripción. |
+| `subscription.past_due` | El cobro automático de una suscripción falló por primera vez. |
+| `subscription.pause` | Se pausó la suscripción. |
+| `subscription.unpause` | Se reanudó una suscripción pausada. |
+| `subscription.reactivate` | Se reactivó una suscripción cancelada. |
+| `subscription.update` | Cambió información general (por ejemplo, el método de pago). |
+| `subscription.item_added` / `subscription.item_removed` | Se agregó o removió un producto recurrente. |
+| `subscription.invoice_item_added` | Se agregó un cargo único a la próxima factura. |
+| `subscription.cancel` | La suscripción fue cancelada. |
+
+### Movimiento de dinero, reembolsos y otros
+
+| Evento | Cuándo se emite |
+|--------|-----------------|
+| `transfer.sent` / `transfer.received` | Transferencia p2p enviada o recibida. |
+| `withdrawal.create` / `withdrawal.update` | Retiro bancario creado o cambio de estado. |
+| `swap.create` / `swap.update` | Envío de stablecoin creado o cambio de estado. |
+| `refund.create` | Reembolso procesado. |
+| `dispute.create` / `dispute.update` | Eventos de contracargo. |
+| `setup_intent.succeeded` / `setup_intent.cancelled` | Tokenización de tarjeta o inicio de suscripción con período de prueba. |
+| `account_connection.create` | Una cuenta hija se conectó a una plataforma. |
+| `partner_commission_invoice.issued` / `partner_commission_invoice.failed` | DTE diario de comisiones. |
+
+Los eventos legacy por método de pago (`payment_intent.*`, `bank_transfer_intent.*`, `crypto_intent.*`, `balance_intent.*`, `cash_intent.succeeded`) se siguen emitiendo junto con los `intent.*` unificados.
 
 ## Ejemplo de payload
 
