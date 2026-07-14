@@ -28,19 +28,61 @@ Los webhooks son notificaciones HTTP que Recurrente envía automáticamente a tu
   </Step>
 
   <Step title="Guarda y prueba el endpoint">
-    Haz clic en **Create** para guardar el endpoint. Svix te permite enviar un evento de prueba directamente desde el panel para verificar que tu servidor lo está recibiendo correctamente.
+    Haz clic en **Create** para guardar el endpoint. Desde la pestaña **Testing** del panel de Svix puedes enviar un ejemplo de cualquier evento del catálogo a tu endpoint y ver el payload, los intentos de entrega y si fue exitosa.
   </Step>
 </Steps>
 
+## Probar tu integración
+
+Hay dos formas de generar webhooks sin mover dinero real:
+
+- **Pagar un checkout de prueba con la tarjeta `4242 4242 4242 4242`.** Se disparan `payment_intent.succeeded` e `intent.succeeded` (`type: payment`) únicamente a los endpoints registrados con llaves **test** (`pk_test_*` / `sk_test_*`). Los pagos de prueba solo simulan tarjeta.
+- **Usar la pestaña Testing del panel de Svix.** Envía a tu endpoint un ejemplo de cualquier evento del catálogo, incluso los que no puedes reproducir con un pago de prueba (suscripciones, disputas, transferencias, etc.).
+
 ## Eventos disponibles
 
-| Evento | Descripción |
-|--------|-------------|
-| `payment_intent.succeeded` | Un pago se completó correctamente |
-| `payment_intent.failed` | Un pago falló o fue rechazado |
-| `subscription.create` | Se creó una nueva suscripción |
-| `subscription.past_due` | El cobro de una suscripción está vencido |
-| `subscription.cancel` | Una suscripción fue cancelada |
+Recurrente emite eventos para pagos, suscripciones, reembolsos, disputas y movimientos de dinero. Los más comunes:
+
+### Eventos de pago (`intent.*`)
+
+| Evento | Cuándo se emite |
+|---|---|
+| `intent.succeeded` | Cobro exitoso con cualquier método de pago. Los fondos ya están en tu balance. |
+| `intent.pending` | Cobro iniciado o pendiente (transferencia, cripto). |
+| `intent.failed` | Cobro fallido. |
+| `intent.canceled` | Intent cancelado. |
+| `intent.paid` | Solo para pagos con balance: llega a la cuenta pagadora si tiene un endpoint configurado. |
+
+### Eventos de suscripción
+
+| Evento | Cuándo se emite |
+|---|---|
+| `subscription.create` | Se crea una suscripción. |
+| `subscription.update` | Cambia información general de la suscripción, como el método de pago. |
+| `subscription.past_due` | El cobro automático falla por primera vez. |
+| `subscription.pause` | Se pausa la suscripción. No se vuelve a cobrar hasta reactivarla. |
+| `subscription.unpause` | Se reanuda una suscripción pausada. |
+| `subscription.reactivate` | Se reactiva una suscripción cancelada dentro del período permitido. |
+| `subscription.cancel` | El cobro automático falla por tercera vez y la suscripción se cancela. |
+| `subscription.item_added`, `subscription.item_removed` | Se agrega o remueve un producto recurrente. |
+| `subscription.invoice_item_added` | Se agrega un cargo único a la próxima factura. |
+
+### Otros eventos
+
+| Evento | Cuándo se emite |
+|---|---|
+| `setup_intent.succeeded` | Se inicia una suscripción con período de prueba o se tokeniza una tarjeta sin cobrarla. |
+| `setup_intent.cancelled` | No se logra tokenizar una tarjeta (p. ej. el primer pago de una suscripción con prueba falla). |
+| `refund.create` | Reembolso procesado. |
+| `dispute.create`, `dispute.update` | Eventos de contracargo. |
+| `transfer.sent`, `transfer.received` | Transferencia P2P enviada o recibida. |
+| `withdrawal.create`, `withdrawal.update` | Retiro bancario creado o cambio de estado. |
+| `swap.create`, `swap.update` | Envío de stablecoin creado o cambio de estado. |
+| `payment_intent.*`, `bank_transfer_intent.*`, `crypto_intent.*`, `balance_intent.*`, `cash_intent.*` | Eventos legacy por método de pago. Siguen funcionando sin cambios. |
+
+<Note>
+Puedes ver el catálogo completo y un payload de ejemplo de cada evento desde la pestaña **Event Catalog** del panel de Svix.
+</Note>
 
 ## Ejemplo de payload
 
