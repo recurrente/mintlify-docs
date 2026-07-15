@@ -1,7 +1,7 @@
 ---
 title: "Semana del 15 de julio, 2026"
 sidebarTitle: "15 de julio, 2026"
-description: "Datos bancarios listos al crear tu cuenta, el POS Pro enruta por tu afiliación al IVA vigente, cuotas preservadas en pagos retroactivos y RTU más estricto."
+description: "Datos bancarios listos al crear tu cuenta, POS Pro sigue tu IVA vigente, cuotas preservadas en pagos retroactivos y llaves de API bajo demanda con copia única."
 ---
 
 ## Actualizaciones
@@ -56,3 +56,15 @@ La verificación de cuentas comerciales ahora valida que la **afiliación al IVA
 - Necesitas regularizar tu situación en el portal de la SAT y volver a descargar tu RTU antes de reintentar la verificación.
 
 Consulta los [requisitos actualizados del RTU](/es/verificar-cuenta#requisitos-del-rtu-para-ser-aceptado) para ver la lista completa antes de subir tu documento.
+
+### Crea y copia tus llaves de API cuando las necesites
+
+En **Mi Cuenta → Desarrolladores y API**, ahora encontrarás dos espacios equivalentes para tus llaves de **modo de prueba** y **modo real (LIVE)**, cada uno con un botón **Crear** para generarlas cuando estés listo. Al momento de crearlas, la llave secreta completa se muestra **una sola vez** con un botón **Copiar** que confirma la copia con un mensaje de "¡Copiado!".
+
+**Qué significa para ti**
+
+- Las cuentas nuevas ya no vienen con una llave recortada e imposible de copiar. Empiezan sin llaves y las generas explícitamente cuando las vayas a usar.
+- Al crear una llave, la copias completa en el momento. Después de recargar la página, la llave secreta vuelve a mostrarse enmascarada, así que guárdala en un lugar seguro antes de salir de la pantalla.
+- Si ya tienes llaves creadas en tu cuenta, no cambia nada: siguen funcionando igual, sin rotación ni pasos adicionales.
+
+Consulta la [guía de la API](/es/integraciones/api) para ver cómo autenticar tus solicitudes con las llaves que generes.
