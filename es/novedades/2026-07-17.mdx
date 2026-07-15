@@ -1,0 +1,22 @@
+---
+title: "Semana del 17 de julio, 2026"
+sidebarTitle: "17 de julio, 2026"
+description: "Los webhooks de transferencia bancaria ahora incluyen la referencia asignada por el banco y el comentario del pagador para facilitar la conciliación."
+---
+
+## Actualizaciones
+
+### Referencia bancaria y comentario del pagador en los webhooks de transferencia
+
+Los webhooks de transferencia bancaria ahora exponen dos datos nuevos que ya recibíamos del banco emisor pero que no compartíamos: la **referencia** asignada por el banco y el **comentario** libre que escribió quien envió la transferencia. Con estos datos, puedes cruzar cada notificación contra tu estado de cuenta sin depender de búsquedas manuales.
+
+**Qué significa para ti**
+
+- En los eventos legacy `bank_transfer_intent.*`, los campos `bank_reference` y `sender_comment` aparecen al nivel principal del payload.
+- En los eventos unificados `intent.*` de tipo `bank_transfer`, y en la respuesta de `GET /api/intents/{id}`, ambos campos aparecen dentro de `details`.
+- La **referencia** corresponde al número interbancario en transferencias locales, al trace ACH o referencia SPEI en depósitos en dólares, o al IMAD en transferencias por wire.
+- El **comentario** es el texto libre que el pagador escribió al hacer la transferencia.
+- Mientras el cobro esté pendiente (por ejemplo, un `bank_transfer_intent.pending` recién creado en checkout), ambos campos llegan como `null` y se completan cuando el banco confirma la transferencia.
+- En el panel de Recurrente, la **referencia** también se muestra en la barra lateral del pago, junto al **comentario** que ya se mostraba.
+
+No necesitas cambiar tu integración para seguir recibiendo webhooks; los campos son aditivos. Consulta la [guía de webhooks](/es/integraciones/webhooks) para ver el catálogo de eventos y cómo consumirlos.
