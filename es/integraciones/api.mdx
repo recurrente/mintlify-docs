@@ -33,9 +33,15 @@ Para autenticarte con la API necesitas dos llaves: una **llave pública** y una 
 
 1. Ingresa a [app.recurrente.com](https://app.recurrente.com)
 2. Ve a **Mi Cuenta → Desarrolladores y API**
-3. Copia tu llave pública (`pk_live_...`) y tu llave secreta (`sk_live_...`)
+3. En el espacio de **modo real (LIVE)**, haz clic en **Crear** para generar tus llaves. Si vas a integrar en pruebas primero, usa el espacio de **modo de prueba**.
+4. Copia tu llave secreta (`sk_live_...` o `sk_test_...`) desde la ventana de confirmación. Solo se muestra completa una vez; después de recargar la página vuelve a mostrarse enmascarada.
+5. Copia tu llave pública (`pk_live_...` o `pk_test_...`) desde el mismo espacio.
 
 Desde esa misma sección también puedes configurar tus webhooks.
+
+<Warning>
+  Guarda tu llave secreta en un lugar seguro apenas la crees. Recurrente no vuelve a mostrarla completa; si la pierdes, tendrás que regenerarla.
+</Warning>
 
 ## Tipos de llaves
 
