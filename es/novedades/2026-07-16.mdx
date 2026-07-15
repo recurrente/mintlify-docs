@@ -1,0 +1,29 @@
+---
+title: "Semana del 16 de julio, 2026"
+sidebarTitle: "16 de julio, 2026"
+description: "La app móvil de Recurrente reproduce un sonido al recibir un pago exitoso y la referencia de la API queda ordenada para encontrar endpoints más rápido."
+---
+
+## Actualizaciones
+
+### Sonido de confirmación al recibir un pago en la app móvil
+
+La **app móvil de Recurrente** ahora reproduce un sonido distintivo cada vez que recibes una notificación de **pago exitoso**. Antes, la notificación llegaba solo con el sonido genérico del sistema, difícil de distinguir cuando cobras en un local con ruido.
+
+**Qué significa para ti**
+
+- Cuando entra un pago con tarjeta, transferencia o cualquier otro método, escuchas una señal clara sin tener que sacar el teléfono para revisar.
+- El sonido se aplica al canal de notificaciones **payment_success** en Android y a las notificaciones push en iOS, sin cambiar el resto de tus alertas.
+- Si tienes el teléfono en silencio, la notificación sigue respetando la configuración del sistema.
+
+Necesitas tener la **última versión** de la app instalada. Consulta la [guía del POS Pro](/es/pos-pro) o la [guía de celular como POS](/es/celular-como-pos) para ver cómo se integra con tus cobros en persona.
+
+### Referencia de la API más fácil de navegar
+
+Reorganizamos [`docs.recurrente.com`](https://docs.recurrente.com) para que los desarrolladores encuentren los endpoints con menos clics. La sección **Test** aparece primero y el resto de las secciones y operaciones se ordenan alfabéticamente.
+
+**Qué significa para ti**
+
+- Si integras la API, la sección de **Test** queda a la vista al abrir la referencia, en lugar de mezclarse con el resto.
+- Los endpoints dentro de cada sección están en orden alfabético, así los conocidos aparecen en el mismo lugar cada vez.
+- La sección **Webhook Endpoints** se limita a las tres operaciones para listar, registrar y eliminar endpoints. Los esquemas de eventos siguen disponibles en Svix y en la guía de webhooks; consulta la [guía de webhooks](/es/integraciones/webhooks) para el catálogo completo.
