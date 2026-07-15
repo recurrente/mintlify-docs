@@ -1,7 +1,7 @@
 ---
 title: "Semana del 15 de julio, 2026"
 sidebarTitle: "15 de julio, 2026"
-description: "Datos bancarios listos al crear tu cuenta, POS Pro sigue tu IVA vigente, cuotas preservadas en pagos retroactivos y llaves de API bajo demanda con copia única."
+description: "Datos bancarios listos al crear tu cuenta, referencia y comentario del pagador en webhooks de transferencia, POS Pro sigue tu IVA y llaves de API bajo demanda."
 ---
 
 ## Actualizaciones
@@ -17,6 +17,32 @@ Cuando completas el proceso para crear tu cuenta en Recurrente, ahora generamos 
 - Si por alguna razón tus datos no aparecieron al momento de crear la cuenta, un proceso automático los completa en las horas siguientes; también puedes escribir a soporte para acelerarlo.
 
 No necesitas hacer nada: el cambio aplica para todas las cuentas nuevas. Consulta cómo se usan estos datos en la [guía de transferencias bancarias](/es/transferencias-bancarias) y en la [guía de transferencias internacionales](/es/transferencias-internacionales).
+
+### Referencia bancaria y comentario del pagador en webhooks de transferencia
+
+Los cobros por transferencia bancaria ya exponen en los webhooks la **referencia que asigna el banco emisor** (número interbancario en GTQ, trace ACH, referencia SPEI o IMAD en depósitos USD) y el **comentario libre** que escribió el pagador. Antes guardábamos estos datos, pero no llegaban al webhook, por lo que era difícil conciliar los eventos contra tu estado de cuenta.
+
+**Qué significa para ti**
+
+- En los eventos legacy `bank_transfer_intent.*`, ambos valores llegan como campos al mismo nivel del payload: `bank_reference` y `sender_comment`.
+- En el formato unificado `intent.*` (con `type: bank_transfer`) y en la respuesta de `GET /api/intents/{id}`, los encuentras dentro del objeto `details` con los mismos nombres.
+- Los dos campos son `null` mientras no se ha recibido la transferencia (por ejemplo, en un `bank_transfer_intent.pending` de un checkout aún sin fondear) y también cuando el pago se registra manualmente sin datos del banco emisor.
+- La referencia también aparece ahora como **Referencia** en el panel lateral del pago, junto al **Comentario** existente.
+
+Ejemplo del payload de un webhook legacy exitoso:
+
+```json
+{
+  "id": "ba_i_ab12cd34",
+  "event_type": "bank_transfer_intent.succeeded",
+  "amount_in_cents": 10000,
+  "currency": "GTQ",
+  "bank_reference": "32146621",
+  "sender_comment": "pago factura julio"
+}
+```
+
+Consulta la [guía de webhooks](/es/integraciones/webhooks) para ver cómo suscribirte a estos eventos y la [guía de la API](/es/integraciones/api) para consultar el intent por ID.
 
 ## Correcciones
 
