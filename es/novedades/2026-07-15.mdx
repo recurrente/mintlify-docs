@@ -1,7 +1,7 @@
 ---
 title: "Semana del 15 de julio, 2026"
 sidebarTitle: "15 de julio, 2026"
-description: "Catálogo completo de eventos de webhook publicado, datos bancarios listos al crear cuenta, POS Pro sigue tu IVA vigente y llaves de API bajo demanda."
+description: "Catálogo de webhooks publicado, datos bancarios al crear cuenta, POS Pro sigue tu IVA, NFC más confiable y llaves de API a demanda."
 ---
 
 ## Actualizaciones
@@ -68,6 +68,18 @@ La verificación de cuentas comerciales ahora valida que la **afiliación al IVA
 - Necesitas regularizar tu situación en el portal de la SAT y volver a descargar tu RTU antes de reintentar la verificación.
 
 Consulta los [requisitos actualizados del RTU](/es/verificar-cuenta#requisitos-del-rtu-para-ser-aceptado) para ver la lista completa antes de subir tu documento.
+
+### Lectura de tarjetas más confiable en Celular como POS
+
+Cuando abres un cobro directo (por ejemplo, una **cuenta de servicio** en un local) desde un celular con **Celular como POS**, la app ahora espera a que el servicio de lectura de tarjetas esté listo antes de activar el NFC. Antes, en algunos casos el cobro podía intentar iniciar la lectura antes de que la configuración de moneda (GTQ) estuviera cargada y mostraba un error de "moneda no encontrada".
+
+**Qué significa para ti**
+
+- Al abrir un cobro en tu celular Android, el lector se activa una sola vez y en el momento correcto, sin errores prematuros de moneda.
+- El comportamiento de la terminal **POS Pro** física no cambia: sigue iniciando el lector de inmediato como antes.
+- Si el servicio reporta varias veces que ya está listo, la app no reinicia la lectura por duplicado.
+
+No necesitas hacer nada: el cambio aplica automáticamente. Consulta la [guía de Celular como POS](/es/celular-como-pos) para ver cómo tomar cobros con NFC.
 
 ### Crea y copia tus llaves de API cuando las necesites
 
