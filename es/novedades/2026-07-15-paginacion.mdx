@@ -1,0 +1,21 @@
+---
+title: "Semana del 15 de julio, 2026 · Mantenimiento de paginación"
+sidebarTitle: "15 de julio, 2026 · Paginación"
+description: "Actualización interna del motor de paginación que impulsa las listas del panel y los encabezados de paginación de la API pública, sin cambios visibles en cómo navegas o integras Recurrente."
+---
+
+## Actualizaciones
+
+### Actualización interna del motor de paginación
+
+Actualizamos el motor interno que impulsa la paginación en el **panel de Recurrente** y en la **API pública**. La versión nueva reemplaza a la que veníamos usando y estandariza cómo generamos las páginas de listas, los feeds de scroll infinito y los encabezados de paginación (`Page-Items`, `Total-Count`, `Link`) que consumen las integraciones.
+
+**Qué significa para ti**
+
+- Las listas del panel (pagos, transferencias, disputas, clientes, suscripciones, productos, tienda en línea, POS y más) se cargan y navegan igual que antes.
+- Los feeds con **scroll infinito** siguen cargando páginas subsecuentes sin cambios en el comportamiento.
+- Si integras la API pública, los encabezados de paginación (incluidos `Page-Items`, `Total-Count` y el `Link` con relaciones `rel="next"` y `rel="prev"`) siguen presentes en las respuestas de las listas. No necesitas modificar tu integración.
+- No hay cambios en los parámetros de página o tamaño de página que ya usas.
+- No necesitas hacer nada.
+
+Esta semana no publicamos nuevas funciones o correcciones visibles para usuarios finales. Consulta las [novedades del 15 de julio](/es/novedades/2026-07-15) para ver los lanzamientos más recientes visibles.
