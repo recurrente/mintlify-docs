@@ -1,10 +1,22 @@
 ---
 title: "Semana del 15 de julio, 2026"
 sidebarTitle: "15 de julio, 2026"
-description: "Los pagos retroactivos de terminal ahora conservan la cantidad de cuotas, y la verificación de RTU rechaza afiliaciones al IVA inactivas con un mensaje más claro."
+description: "El POS Pro ahora enruta cada cobro nuevo por tu afiliación al IVA vigente, los pagos retroactivos de terminal conservan la cantidad de cuotas, y la verificación de RTU rechaza afiliaciones al IVA inactivas con un mensaje más claro."
 ---
 
 ## Correcciones
+
+### El POS Pro sigue tu afiliación al IVA vigente
+
+Si tu cuenta cambia de régimen fiscal (por ejemplo, de Pequeño Contribuyente a General, o al régimen de Exentos), los **cobros nuevos** en tu terminal POS Pro se enrutan automáticamente por la afiliación al IVA que tienes vigente hoy. Antes, la terminal podía seguir liquidando por la afiliación anterior hasta que la re-vinculabas manualmente.
+
+**Qué significa para ti**
+
+- Cada nuevo cobro con tarjeta usa el terminal y la afiliación que corresponden a tu régimen actual y a la moneda del cobro (GTQ o USD).
+- Las **anulaciones**, **reimpresiones de voucher** y **reconciliaciones** de cobros hechos antes del cambio siguen usando el terminal original con el que se procesaron, para que la operación no sea rechazada por el banco.
+- Si por algún motivo no encontramos una afiliación válida para tu régimen y moneda actuales, el cobro se detiene con un mensaje claro en lugar de intentar liquidar por un canal incorrecto.
+
+No necesitas hacer nada: el cambio se aplica solo la próxima vez que cobres. Consulta la [guía del POS Pro](/es/pos-pro) o los [detalles de retención de IVA](/es/retencion-de-iva) si quieres revisar cómo se refleja tu régimen en los cobros.
 
 ### Cuotas preservadas en pagos retroactivos de terminal
 
