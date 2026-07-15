@@ -1,0 +1,38 @@
+---
+title: "Semana del 22 de julio, 2026"
+sidebarTitle: "22 de julio, 2026"
+description: "El checkout rápido muestra los datos más recientes de cada pagador recurrente y bloquea el uso de tarjetas guardadas que pertenecen a otra persona."
+---
+
+## Correcciones
+
+### Datos del pagador siempre al día en el checkout rápido
+
+Cuando un cliente vuelve a comprarte, el **checkout rápido** ahora precarga el **nombre, la dirección y los datos de facturación más recientes** que ese cliente dejó contigo, incluso si esos datos se enviaron con una tarjeta distinta a la que va a usar hoy. Antes, esos campos venían atados a la tarjeta seleccionada y podían quedar desactualizados.
+
+**Qué significa para ti**
+
+- El pagador ve su información al día sin tener que reescribirla, lo que reduce la fricción y los abandonos en el checkout.
+- Cada campo (contacto, dirección, NIT y datos de factura) se toma del último pago aprobado en el que ese cliente lo completó contigo, de forma independiente por campo.
+- El **nombre del pagador** queda registrado en cada pago en el momento de la transacción, así que tus reportes históricos no cambian si el cliente edita su perfil más adelante.
+- La identidad global del cliente en Recurrente no se ve afectada: los cambios aplican al perfil que ese cliente tiene contigo como comercio.
+
+### Tarjetas guardadas de otro pagador ya no se pueden usar
+
+Si un checkout tiene un **pagador preasignado** (por ejemplo, un link de pago dirigido a un cliente específico), Recurrente ahora **rechaza** las tarjetas guardadas que pertenecen a otro usuario. El checkout también preserva el orden de las tarjetas guardadas en la cookie y utiliza consistentemente la última tarjeta elegible para validar, mostrar, enviar y cobrar.
+
+**Qué significa para ti**
+
+- Los cobros dirigidos a un cliente concreto no pueden liquidarse con la tarjeta guardada de otra persona, incluso si esa cookie está presente en el navegador.
+- La tarjeta que ve el cliente en el checkout rápido es la misma que se envía y se cobra, sin desalineaciones entre lo mostrado y lo procesado.
+
+### Los checkouts de precio dinámico se atan al pagador solo al pagar
+
+En un **checkout de precio dinámico** abierto (por ejemplo, propinas o donaciones), abrir el enlace con una tarjeta guardada en cookie ya no vincula el checkout a esa persona. La tarjeta guardada se usa únicamente para **prellenar** los datos y calcular las **comisiones**, y el pagador se registra solo cuando se envían los datos de pago.
+
+**Qué significa para ti**
+
+- Si compartes un mismo enlace de precio dinámico entre varias personas, cada quien puede pagarlo y quedar registrado como el pagador real de ese cobro.
+- El cliente y el pago resultante quedan vinculados a quien efectivamente completó el pago, no a quien abrió el enlace primero.
+
+Estos cambios aplican automáticamente. Consulta la [guía de links de pago](/es/links-de-pago) y la [guía de tienda en línea](/es/tienda-en-linea) para ver cómo se comporta el checkout rápido en tus cobros.
