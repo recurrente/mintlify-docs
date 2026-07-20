@@ -1,7 +1,7 @@
 ---
 title: "Webhooks: recibe notificaciones de pago en tiempo real"
 sidebarTitle: "Webhooks"
-description: "Registra un endpoint de webhook en Recurrente para recibir notificaciones en tiempo real de pagos, suscripciones, retiros, reembolsos y disputas."
+description: "Registra un endpoint de webhook en Recurrente para recibir notificaciones en tiempo real de pagos, suscripciones, retiros, reembolsos, disputas y verificaciones de cuentas conectadas."
 ---
 
 Los webhooks son notificaciones HTTP que Recurrente envía automáticamente a tu servidor cada vez que ocurre un evento importante en tu cuenta, como un pago completado, un pago fallido o un cambio en el estado de una suscripción. En lugar de tener que consultar la API periódicamente, tu servidor recibe la información en tiempo real y puede reaccionar de inmediato.
@@ -34,7 +34,7 @@ Los webhooks son notificaciones HTTP que Recurrente envía automáticamente a tu
 
 ## Eventos disponibles
 
-Recurrente emite 46 tipos de eventos. Puedes verlos todos, con su esquema y un ejemplo, en la pestaña **Testing** del panel de Svix.
+Recurrente emite 47 tipos de eventos. Puedes verlos todos, con su esquema y un ejemplo, en la pestaña **Testing** del panel de Svix.
 
 ### Eventos de pago (`intent.*`)
 
@@ -73,6 +73,14 @@ Recurrente emite 46 tipos de eventos. Puedes verlos todos, con su esquema y un e
 | `account_connection.create` | Una cuenta hija se conectó a una plataforma. |
 | `partner_commission_invoice.issued` / `partner_commission_invoice.failed` | DTE diario de comisiones. |
 
+### Verificación de cuentas conectadas
+
+| Evento | Cuándo se emite |
+|--------|-----------------|
+| `verification.document_rejected` | El procesamiento posterior al envío rechaza un documento de una cuenta conectada por inválido o ilegible. |
+
+Este evento se entrega al endpoint de la **cuenta madre**. Dentro de `data`, `connected` es `true` y `account_id` identifica a la cuenta hija. También incluye `account`, `status` y `document_errors`, con los documentos que necesitan corrección y el motivo informado por el procesador.
+
 Los eventos legacy por método de pago (`payment_intent.*`, `bank_transfer_intent.*`, `crypto_intent.*`, `balance_intent.*`, `cash_intent.succeeded`) se siguen emitiendo junto con los `intent.*` unificados.
 
 ## Ejemplo de payload
@@ -96,6 +104,22 @@ Cuando Recurrente envía un evento a tu endpoint, el body de la solicitud tiene 
 ```
 
 Usa el campo `event_type` para determinar qué acción tomar en tu lógica de negocio.
+
+Para `verification.document_rejected`, los campos relevantes de `data` tienen esta forma:
+
+```json
+{
+  "event_type": "verification.document_rejected",
+  "connected": true,
+  "account_id": "acc_xxxxxxxxxxxxxxxx",
+  "status": "pending",
+  "document_errors": {
+    "tax_registration_document": "No pudimos leer el RTU"
+  }
+}
+```
+
+Trata `document_errors` como un objeto: puede contener uno o varios documentos y sus mensajes. Pide a la cuenta hija que reemplace únicamente los documentos señalados.
 
 ## Buenas prácticas
 
